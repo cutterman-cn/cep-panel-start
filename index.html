@@ -3,9 +3,79 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="./js/CSInterface-6.1.0.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/fonts/stylesheet.css">
+        <link rel="stylesheet" id="theme-link" href="./css/topcoat/topcoat-desktop-dark.min.css">
+        <style>
+            html,
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+        
+            body {
+                font-family: source-sans-pro, sans-serif;
+                position: relative;
+                -webkit-font-smoothing: antialiased;
+                padding-left: 20px;
+            }
+        </style>
     </head>
 
-    <body style="background: white">
-        <h3>插件面板内容</h3>
+    <body id="body">
+        <h3>Topcoat Components</h3>
+        <div class="topcoat-button-bar">
+            <div class="topcoat-button-bar__item">
+              <button class="topcoat-button-bar__button">One</button>
+            </div>
+            <div class="topcoat-button-bar__item">
+              <button class="topcoat-button-bar__button">Two</button>
+            </div>
+            <div class="topcoat-button-bar__item">
+              <button class="topcoat-button-bar__button">Three</button>
+            </div>
+        </div>
+        <br/>
+        <button class="topcoat-button">Button</button>
+        <button class="topcoat-button" disabled>Button</button>
+        <br/>
+        <button class="topcoat-button--quiet">Button</button>
+        <button class="topcoat-button--quiet" disabled>Button</button>
+        <br/>
+        <button class="topcoat-button--cta" >Button</button>
+        <button class="topcoat-button--cta" disabled>Button</button>
+        <br/>
+        <br/>
+        <label class="topcoat-checkbox">
+            <input type="checkbox">
+            <div class="topcoat-checkbox__checkmark"></div>
+            Default
+        </label>
+        <label class="topcoat-checkbox">
+            <input type="checkbox" disabled>
+            <div class="topcoat-checkbox__checkmark"></div>
+            Disabled
+        </label>
+        <br/>
+        <br/>
+        <label class="topcoat-switch">
+            <input type="checkbox" class="topcoat-switch__input">
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <br>
+          <br>
+          <label class="topcoat-switch">
+            <input type="checkbox" class="topcoat-switch__input" checked>
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+          <br>
+          <br>
+          <label class="topcoat-switch">
+            <input type="checkbox" class="topcoat-switch__input" disabled>
+            <div class="topcoat-switch__toggle"></div>
+          </label>
+
     </body>
+    <script src="js/main.js"></script>
 </html>
