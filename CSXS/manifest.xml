@@ -24,7 +24,7 @@
                     <CEFCommandLine>
                         <Parameter>--enable-nodejs</Parameter>
                     </CEFCommandLine>
-                    <ScriptPath>./jsx/core.jsx</ScriptPath>
+                    <ScriptPath>./jsx/main.jsx</ScriptPath>
                 </Resources>
                 <Lifecycle>
                     <AutoVisible>true</AutoVisible>

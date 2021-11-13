@@ -24,58 +24,15 @@
     </head>
 
     <body id="body">
-        <h3>Topcoat Components</h3>
-        <div class="topcoat-button-bar">
-            <div class="topcoat-button-bar__item">
-              <button class="topcoat-button-bar__button">One</button>
-            </div>
-            <div class="topcoat-button-bar__item">
-              <button class="topcoat-button-bar__button">Two</button>
-            </div>
-            <div class="topcoat-button-bar__item">
-              <button class="topcoat-button-bar__button">Three</button>
-            </div>
-        </div>
-        <br/>
-        <button class="topcoat-button">Button</button>
-        <button class="topcoat-button" disabled>Button</button>
-        <br/>
-        <button class="topcoat-button--quiet">Button</button>
-        <button class="topcoat-button--quiet" disabled>Button</button>
-        <br/>
-        <button class="topcoat-button--cta" >Button</button>
-        <button class="topcoat-button--cta" disabled>Button</button>
-        <br/>
-        <br/>
-        <label class="topcoat-checkbox">
-            <input type="checkbox">
-            <div class="topcoat-checkbox__checkmark"></div>
-            Default
-        </label>
-        <label class="topcoat-checkbox">
-            <input type="checkbox" disabled>
-            <div class="topcoat-checkbox__checkmark"></div>
-            Disabled
-        </label>
-        <br/>
-        <br/>
-        <label class="topcoat-switch">
-            <input type="checkbox" class="topcoat-switch__input">
-            <div class="topcoat-switch__toggle"></div>
-          </label>
-          <br>
-          <br>
-          <label class="topcoat-switch">
-            <input type="checkbox" class="topcoat-switch__input" checked>
-            <div class="topcoat-switch__toggle"></div>
-          </label>
-          <br>
-          <br>
-          <label class="topcoat-switch">
-            <input type="checkbox" class="topcoat-switch__input" disabled>
-            <div class="topcoat-switch__toggle"></div>
-          </label>
-
+        <h3>面板与宿主之间的交互</h3>
+        <button onclick="helloThere()" class="topcoat-button--cta" >Hello There</button>
+        <button onclick="getActiveLayerName()" class="topcoat-button--cta" >图层名称</button>
+        <br/><br/>
+        <button onclick="jsxToJs()" class="topcoat-button--cta" >CSXSEvent 测试</button>
+        <p>当前选中图层： <span id="selected-layer"></span></p>
     </body>
-    <script src="js/main.js"></script>
+    <script>
+        document.write('<script src="js/main.js?t='+(new Date().getTime())+'"><\/script>');
+    </script>
+    
 </html>

@@ -1,5 +1,8 @@
 
 var csInterface = new CSInterface();
+var appId = csInterface.getApplicationID();
+var extId = csInterface.getExtensionID();
+var selectEventId = 0;
 
 function syncTheme() {
     var skinInfo = csInterface.getHostEnvironment().appSkinInfo;
@@ -33,6 +36,36 @@ function getTheme() {
     return theme;
 }
 
+function helloThere() {
+    console.log('on click 111');
+    csInterface.evalScript(`alert("hell there")`);
+}
+
+function getActiveLayerName() {
+    var params = {a:100, b:200};
+    csInterface.evalScript(`getActiveLayerName(${JSON.stringify(params)})`, (result) => {
+        console.log(result);
+    });
+}
+
+function jsxToJs() {
+    csInterface.evalScript(`jsxToJs()`);
+}
+
+function registerEvent(stringId) {
+    csInterface.evalScript(`app.stringIDToTypeID('${stringId}')`, function (data) {
+        selectEventId = data;
+        var csEvent = new CSEvent();
+        csEvent.type = 'com.adobe.PhotoshopRegisterEvent';
+        csEvent.scope = 'APPLICATION';
+        csEvent.appId = appId;
+        csEvent.extensionId = extId;
+        csEvent.data = data;
+        csInterface.dispatchEvent(csEvent);
+    });
+}
+
+registerEvent('select');
 
 window.addEventListener('load', () => {
     //syncTheme();
@@ -41,4 +74,28 @@ window.addEventListener('load', () => {
     csInterface.addEventListener('com.adobe.csxs.events.ThemeColorChanged', () => {
         syncTheme2();
     });
+
+
+    csInterface.addEventListener('my_custom_event_type', (result) => {
+        console.log(result);
+    });
+
+    csInterface.addEventListener('com.adobe.PhotoshopJSONCallback' + extId, function(result) {
+        //console.log(result);
+        var data = result.data.replace(/ver1,/, '');
+        var obj = JSON.parse(data);
+        if (parseInt(obj.eventID) === parseInt(selectEventId)) {
+            csInterface.evalScript('activeDocument.activeLayer.name', (name) => {
+                document.getElementById('selected-layer').innerHTML = name;
+            });
+        }
+    });
+
+    /*
+    var helloThereBtn = document.getElementById('hello-there');
+    helloThereBtn.addEventListener('click', () => {
+        console.log('on click');
+        csInterface.evalScript(`alert("hell there")`);
+    });
+    */
 });
