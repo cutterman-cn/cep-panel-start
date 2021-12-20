@@ -4,6 +4,9 @@ CEP插件面板demo，这个工程是一个让你可以快速开始CEP面板开�
 
 这个工程是[CEP系列教程](https://blog.cutterman.cn/)的配套工程，存放教程中的例子代码，每一篇文章涉及的代码分支不同，列举如下
 
+## 【CEP教程-8】ActionManager
+
+
 ## 【CEP教程-5】插件面板的样式
 
 [【CEP教程-5】插件面板的样式](https://blog.cutterman.cn/2021/11/01/cep-panel-styling/)
