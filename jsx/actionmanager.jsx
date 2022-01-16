@@ -10,6 +10,7 @@ function ADToJson(desc) {
         var typeID = desc.getKey(i);
         var stringID = typeIDToStringID(typeID);
         var typeString = (desc.getType(typeID)).toString();
+        $.writeln(stringID + "=> " + typeString);
         switch(typeString) {
             case "DescValueType.BOOLEANTYPE": 
                 json[stringID] = desc.getBoolean(typeID);
@@ -87,6 +88,43 @@ function getCurrentDocumentInfo() {
     return json
 }
 
-var doc = getCurrentDocumentInfo();
-$.writeln(doc.title);
+//var doc = getCurrentDocumentInfo();
+//$.writeln(doc.title);
+//var json = ADToJson(desc);
+
+/*
+var ref1 = new ActionReference();
+ref1.putEnumerated(stringIDToTypeID('application'), charIDToTypeID('Ordn'), charIDToTypeID('Trgt'));
+var appDesc = executeActionGet(ref1);
+var currentToolOptions = appDesc.getObjectValue(stringIDToTypeID("currentToolOptions"));
+var textTool = currentToolOptions.getObjectValue(stringIDToTypeID("textToolCharacterOptions"));
+var style = textTool.getObjectValue(stringIDToTypeID("textStyle"))
+var fontName = style.getString(stringIDToTypeID("fontName"));
+var fontStyleName = style.getString(stringIDToTypeID("fontStyleName"));
+var fontPostScriptName = style.getString(stringIDToTypeID("fontPostScriptName"));
+$.writeln(fontName + " - " + fontStyleName + " - " + fontPostScriptName);
+*/
+
+// 创建一个textStyle的AD，给它重新赋值
+var textStyle = new ActionDescriptor();
+    textStyle.putString(stringIDToTypeID("fontName"), "Consolas");
+    textStyle.putString(stringIDToTypeID("fontStyleName"), "Regular");
+    textStyle.putString(stringIDToTypeID("fontPostScriptName"), "Consolas");
+
+// 创建一个textToolCharacterOptions的AD，将textStyle赋值给它
+var textToolCharacterOptions = new ActionDescriptor();
+textToolCharacterOptions.putObject(stringIDToTypeID("textStyle"), stringIDToTypeID("textStyle"), textStyle);
+
+// 创建一个currentToolOptions的AD，将textToolCharacterOptions赋值给它
+var currentToolOptions = new ActionDescriptor();
+currentToolOptions.putObject(stringIDToTypeID("textToolCharacterOptions"), stringIDToTypeID("textToolCharacterOptions"), textToolCharacterOptions);
+// 将currentToolOptions赋值给文字工具
+var desc1 = new ActionDescriptor();
+    var ref1 = new ActionReference();
+        ref1.putClass(stringIDToTypeID('typeCreateOrEditTool'));    // 文字工具这个目标对象
+desc1.putReference( stringIDToTypeID( "null" ), ref1 );
+desc1.putObject( stringIDToTypeID( "to" ), stringIDToTypeID( "null" ), currentToolOptions);
+executeAction( stringIDToTypeID( "set" ), desc1, DialogModes.NO );
+
+
 
